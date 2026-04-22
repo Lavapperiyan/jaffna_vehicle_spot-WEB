@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Details | Jaffna Vehicle Spot</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <!-- LineAwesome Icons -->
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Supabase JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        .details-container {
+            padding-top: 120px;
+            padding-bottom: 80px;
+        }
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+        .image-gallery {
+            position: sticky;
+            top: 100px;
+        }
+        .main-image {
+            width: 100%;
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-subtle);
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .main-image:hover {
+            transform: scale(1.02);
+        }
+        .thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        .thumbnail {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .thumbnail:hover, .thumbnail.active {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        .vehicle-info-panel {
+            padding: 30px;
+        }
+        .info-header {
+            margin-bottom: 30px;
+        }
+        .info-header .badge {
+            margin-bottom: 10px;
+        }
+        .info-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+        }
+        .info-header .price-tag {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: 800;
+        }
+        .specs-detailed {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .detail-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .detail-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .detail-value i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        .action-box {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--glass-border);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            color: var(--primary);
+        }
+        
+        @media (max-width: 992px) {
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+            .image-gallery {
+                position: relative;
+                top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-orb top-left"></div>
+    <div class="glow-orb bottom-right"></div>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo-brand">
+                <img src="logo.jpg" alt="Jaffna Vehicle Spot" class="brand-icon">
+                <span class="brand-text">Jaffna Vehicle Spot</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#featured">Collection</a></li>
+                <li><a href="index.html#contact" class="btn-primary">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="details-container container">
+        <a href="index.html#featured" class="back-link"><i class="las la-arrow-left"></i> Back to Showroom</a>
+        
+        <div id="details-loader" class="text-center" style="padding: 100px;">
+            <i class="las la-spinner la-spin" style="font-size: 3rem; color: var(--primary);"></i>
+            <p style="margin-top: 15px;">Fetching vehicle details...</p>
+        </div>
+
+        <div id="details-content" class="details-grid" style="display: none;">
+            <!-- Images -->
+            <div class="image-gallery">
+                <img id="main-view" src="" alt="Vehicle Image" class="main-image">
+                <div id="thumbnails" class="thumbnail-grid">
+                    <!-- Thumbnails will be injected here -->
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="vehicle-info-panel glass-panel">
+                <div class="info-header">
+                    <span id="v-status" class="badge">Available</span>
+                    <h1 id="v-title">Vehicle Name</h1>
+                    <p id="v-price" class="price-tag">LKR 0.00</p>
+                </div>
+
+                <div class="specs-detailed">
+                    <div class="detail-item">
+                        <span class="detail-label">Brand / Make</span>
+                        <span id="v-make" class="detail-value"><i class="las la-certificate"></i> -</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Model</span>
+                        <span id="v-model" class="detail-value"><i class="las la-car"></i> -</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Year of Manufacture</span>
+                        <span id="v-year" class="detail-value"><i class="las la-calendar"></i> -</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Fuel Type</span>
+                        <span id="v-fuel" class="detail-value"><i class="las la-gas-pump"></i> -</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Transmission</span>
+                        <span id="v-transmission" class="detail-value"><i class="las la-cogs"></i> -</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Category</span>
+                        <span id="v-category" class="detail-value"><i class="las la-tag"></i> -</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Registration No</span>
+                        <span id="v-reg" class="detail-value"><i class="las la-id-card"></i> -</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Color</span>
+                        <span id="v-color" class="detail-value"><i class="las la-palette"></i> -</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Engine No</span>
+                        <span id="v-engine" class="detail-value"><i class="las la-tools"></i> -</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Chassis No</span>
+                        <span id="v-chassis" class="detail-value"><i class="las la-barcode"></i> -</span>
+                    </div>
+                </div>
+
+                <div class="action-box">
+                    <h3>Interested in this vehicle?</h3>
+                    <p style="color: var(--text-muted);">Contact our sales team directly for more information or to arrange a test drive.</p>
+                    <a id="whatsapp-btn" href="#" class="btn-whatsapp btn-large">
+                        <i class="lab la-whatsapp"></i> Chat on WhatsApp
+                    </a>
+                    <a href="tel:+94778449700" class="btn-secondary btn-large">
+                        <i class="las la-phone"></i> Call 077 844 9700
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Jaffna Vehicle Spot. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const SUPABASE_URL = 'https://uhczvfobofjosodsaicq.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_GlH52YJEuONAGrkxiYWJjQ_mL8SbJET';
+        const STORAGE_URL = `${SUPABASE_URL}/storage/v1/object/public/vehicle%20image/`;
+
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        async function loadVehicleDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const vehicleId = urlParams.get('id');
+
+            if (!vehicleId) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            try {
+                const { data, error } = await supabaseClient
+                    .from('vehicles')
+                    .select('*')
+                    .eq('id', vehicleId)
+                    .single();
+
+                if (error || !data) throw error || new Error('Vehicle not found');
+
+                renderVehicle(data);
+            } catch (err) {
+                console.error('Error:', err);
+                document.getElementById('details-loader').innerHTML = `
+                    <div style="color: var(--danger);">
+                        <i class="las la-exclamation-circle" style="font-size: 3rem;"></i>
+                        <p style="margin-top: 15px;">Vehicle not found or an error occurred.</p>
+                        <a href="index.html" class="btn-primary mt-5">Return to Home</a>
+                    </div>
+                `;
+            }
+        }
+
+        function renderVehicle(vehicle) {
+            document.getElementById('details-loader').style.display = 'none';
+            document.getElementById('details-content').style.display = 'grid';
+
+            // Text content
+            document.getElementById('v-title').textContent = `${vehicle.name} ${vehicle.model || ''}`;
+            document.getElementById('v-price').textContent = vehicle.selling_price ? 
+                `LKR ${new Intl.NumberFormat().format(vehicle.selling_price)}` : 
+                'Contact for Price';
+            
+            document.getElementById('v-status').textContent = vehicle.status || 'Available';
+            document.getElementById('v-make').innerHTML = `<i class="las la-certificate"></i> ${vehicle.brand || vehicle.make || '-'}`;
+            document.getElementById('v-model').innerHTML = `<i class="las la-car"></i> ${vehicle.model || '-'}`;
+            document.getElementById('v-year').innerHTML = `<i class="las la-calendar"></i> ${vehicle.year || vehicle.year_of_manufacture || '-'}`;
+            document.getElementById('v-fuel').innerHTML = `<i class="las la-gas-pump"></i> ${vehicle.fuel_type || '-'}`;
+            document.getElementById('v-transmission').innerHTML = `<i class="las la-cogs"></i> ${vehicle.configurations || 'Automatic'}`;
+            document.getElementById('v-category').innerHTML = `<i class="las la-tag"></i> ${vehicle.category || vehicle.type || '-'}`;
+            document.getElementById('v-reg').innerHTML = `<i class="las la-id-card"></i> ${vehicle.registration_no || '-'}`;
+            document.getElementById('v-color').innerHTML = `<i class="las la-palette"></i> ${vehicle.color || '-'}`;
+            document.getElementById('v-engine').innerHTML = `<i class="las la-tools"></i> ${vehicle.engine_no || '-'}`;
+            document.getElementById('v-chassis').innerHTML = `<i class="las la-barcode"></i> ${vehicle.chassis_no || '-'}`;
+
+            // Images
+            let allImages = [];
+            if (vehicle.image_url) allImages.push(vehicle.image_url);
+            if (vehicle.image_urls && Array.isArray(vehicle.image_urls)) {
+                allImages = [...allImages, ...vehicle.image_urls];
+            }
+            // Filter unique images and format URLs
+            allImages = [...new Set(allImages)].map(path => 
+                path.startsWith('http') ? path : (STORAGE_URL + path)
+            );
+
+            const mainView = document.getElementById('main-view');
+            mainView.src = allImages.length > 0 ? allImages[0] : 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=80';
+            mainView.onerror = function() { this.src = 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=800&q=80'; };
+
+            const thumbContainer = document.getElementById('thumbnails');
+            if (allImages.length > 1) {
+                allImages.forEach((imgUrl, index) => {
+                    const img = document.createElement('img');
+                    img.src = imgUrl;
+                    img.className = 'thumbnail' + (index === 0 ? ' active' : '');
+                    img.onclick = () => {
+                        mainView.src = imgUrl;
+                        document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+                        img.classList.add('active');
+                    };
+                    thumbContainer.appendChild(img);
+                });
+            }
+
+            // WhatsApp link
+            const whatsappMsg = `I'm interested in the ${vehicle.name} ${vehicle.model} (${vehicle.year || ''}). ID: ${vehicle.id}`;
+            document.getElementById('whatsapp-btn').href = `https://wa.me/94778449700?text=${encodeURIComponent(whatsappMsg)}`;
+            
+            document.title = `${vehicle.name} ${vehicle.model} | Jaffna Vehicle Spot`;
+        }
+
+        window.addEventListener('DOMContentLoaded', loadVehicleDetails);
+    </script>
+</body>
+</html>
