@@ -264,6 +264,7 @@
                 const { data, error } = await supabaseClient
                     .from('vehicles')
                     .select('*')
+                    .neq('status', 'Deleted')
                     .order('created_at', { ascending: false });
 
                 if (error) throw error;
