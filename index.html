@@ -4,61 +4,111 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jaffna Vehicle Spot | Premium Automotive Experience</title>
-    <meta name="description" content="Jaffna Vehicle Spot - North Province's premier destination for high-quality imported and local vehicles. Discover luxury cars, SUVs, and motorcycles in Jaffna with certified quality.">
-    <meta name="keywords" content="Jaffna vehicle spot, car sale Jaffna, buy cars Jaffna, luxury vehicles Sri Lanka, premium car dealership Jaffna, vehicle spot Sri Lanka">
     
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://jaffnavehiclespot.com/">
-    <meta property="og:title" content="Jaffna Vehicle Spot | Premium Automotive Experience">
-    <meta property="og:description" content="Explore Northern Province's best selection of premium vehicles. Quality checked, certified, and ready for you.">
-    <meta property="og:image" content="logo.jpg">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://jaffnavehiclespot.com/">
-    <meta property="twitter:title" content="Jaffna Vehicle Spot | Premium Automotive Experience">
-    <meta property="twitter:description" content="Explore Northern Province's best selection of premium vehicles. Quality checked, certified, and ready for you.">
-    <meta property="twitter:image" content="logo.jpg">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-    <!-- LineAwesome Icons -->
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Jaffna Vehicle Spot - Sri Lanka's premier destination for high-quality luxury and certified vehicles. Discover exceptional quality and performance in Jaffna.">
+    <meta name="keywords" content="Jaffna vehicle spot, car sale Jaffna, luxury cars Sri Lanka, buy cars Jaffna, certified vehicles">
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    
     <!-- Custom Styles -->
     <link rel="stylesheet" href="style.css">
-    <!-- Supabase JS Library -->
+    
+    <!-- Supabase JS -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .service-card {
+            background: var(--bg-surface);
+            padding: 3.5rem 2.5rem;
+            border-radius: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--primary);
+            background: rgba(0, 242, 255, 0.03);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .service-icon-box {
+            width: 90px;
+            height: 90px;
+            background: var(--primary);
+            border-radius: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2.5rem;
+            color: var(--secondary);
+            font-size: 2.8rem;
+            position: relative;
+            z-index: 2;
+            transition: 0.5s;
+        }
+
+        .service-card:hover .service-icon-box {
+            transform: rotate(15deg) scale(1.1);
+            box-shadow: 0 0 40px var(--primary-glow);
+        }
+
+        .service-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 1.25rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Dynamic Background Effects -->
-    <div class="glow-orb top-left"></div>
-    <div class="glow-orb bottom-right"></div>
-    <div class="glow-orb center"></div>
+    <!-- Background Effects -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
 
     <!-- Navigation Menu -->
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <div class="container nav-container">
             <a href="#" class="logo-brand">
-                <img src="logo.jpg" alt="Jaffna Vehicle Spot" class="brand-icon">
-                <span class="brand-text">Jaffna Vehicle Spot</span>
+                <img src="logo.jpg" alt="JVS" class="brand-icon">
+                <span class="brand-text">Jaffna Vehicle <span class="text-gradient">Spot</span></span>
             </a>
             
-            <!-- Pure CSS Hamburger Menu -->
-            <input type="checkbox" id="nav-toggle" class="nav-toggle">
-            <label for="nav-toggle" class="nav-toggle-label">
+            <div class="nav-toggle-label" id="mobile-toggle">
                 <span></span>
                 <span></span>
                 <span></span>
-            </label>
+            </div>
 
-            <ul class="nav-links">
+            <ul class="nav-links" id="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#featured">Featured</a></li>
+                <li><a href="#featured">Inventory</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#contact" class="btn-primary" style="margin-left: 15px;">Contact Us</a></li>
+                <li><a href="#leadership">Leadership</a></li>
+                <li><a href="contact.html" class="btn btn-primary">Contact Us</a></li>
             </ul>
         </div>
     </nav>
@@ -67,199 +117,328 @@
     <header id="home" class="hero">
         <div class="container hero-container">
             <div class="hero-content">
-                <div class="badge">Sri Lanka's #1 Premium Dealer</div>
-                <h1 class="hero-title">Experience the Drive of Your <span class="text-gradient">Dreams</span></h1>
+                <div class="hero-badge">
+                    <i class="las la-certificate"></i>
+                    Sri Lanka's #1 Premium Dealer
+                </div>
+                <h1 class="hero-title">Experience the <br><span class="text-gradient">Drive of Dreams</span></h1>
                 <p class="hero-subtitle">Discover our exclusive collection of luxury and premium vehicles. Exceptional quality, unmatched performance, right here in Jaffna.</p>
                 <div class="hero-actions">
-                    <a href="#featured" class="btn-primary btn-large">
+                    <a href="#featured" class="btn btn-primary btn-large">
                         Explore Collection <i class="las la-arrow-right"></i>
                     </a>
-                    <a href="#contact" class="btn-secondary btn-large">
+                    <a href="tel:+94778449700" class="btn btn-secondary btn-large">
                         <i class="las la-phone"></i> Call Dealership
                     </a>
                 </div>
             </div>
             
-            <!-- Pure CSS 3D-ish image showcase (No JS needed) -->
-            <div class="hero-image-wrapper">
-                <div class="hero-image-backdrop"></div>
-                <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Luxury Car" class="hero-main-img">
+            <div class="hero-visual">
+                <div id="hero-slider" class="hero-slider">
+                    <!-- Dynamic images will be injected here -->
+                    <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Premium Car" class="hero-main-img active">
+                </div>
                 
-                <div class="floating-card top-card">
-                    <i class="las la-shield-alt"></i>
+                <div class="floating-card card-top glass">
+                    <i class="las la-shield-alt" style="font-size: 1.8rem; color: var(--primary);"></i>
                     <div>
-                        <strong>Certified</strong>
-                        <p>100% Quality Checked</p>
+                        <strong style="font-size: 1rem;">Certified</strong>
+                        <p style="font-size: 0.75rem; color: var(--text-muted); white-space: nowrap;">100% Quality Checked</p>
+                    </div>
+                </div>
+                
+                <div class="floating-card card-bottom glass">
+                    <i class="las la-wallet" style="font-size: 1.8rem; color: var(--primary);"></i>
+                    <div>
+                        <strong style="font-size: 1rem;">Instant Loan</strong>
+                        <p style="font-size: 0.75rem; color: var(--text-muted); white-space: nowrap;">Easy Finance Options</p>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Filter Bar (Pure CSS interaction concept) -->
-    <section class="filter-section container">
-        <div class="glass-panel search-panel">
-            <div class="search-input-group">
-                <i class="las la-search"></i>
-                <input type="text" placeholder="Search by make, model, or year...">
+    <!-- Advanced Search Panel -->
+    <section class="container search-bar">
+        <div class="glass search-inner">
+            <div class="input-group">
+                <div class="input-icon"><i class="las la-search"></i></div>
+                <div class="input-wrapper">
+                    <label>Search Vehicles</label>
+                    <input type="text" id="search-input" placeholder="Make, model, or year...">
+                </div>
             </div>
-            <div class="filter-options">
-                <select class="custom-select">
-                    <option>All Types</option>
-                    <option>Sedan</option>
-                    <option>SUV</option>
-                    <option>Hatchback</option>
-                </select>
-                <select class="custom-select">
-                    <option>Any Price</option>
-                    <option>Under 5M LKR</option>
-                    <option>5M - 10M LKR</option>
-                    <option>10M+ LKR</option>
-                </select>
+            <div class="input-group">
+                <div class="input-icon"><i class="las la-car"></i></div>
+                <div class="input-wrapper">
+                    <label>Category</label>
+                    <select id="category-filter">
+                        <option value="All">All Categories</option>
+                        <option value="Sedan">Sedan</option>
+                        <option value="SUV">SUV</option>
+                        <option value="Van">Van</option>
+                    </select>
+                </div>
             </div>
-            <button class="btn-primary search-btn">Find Vehicles</button>
+            <div class="input-group">
+                <div class="input-icon"><i class="las la-tag"></i></div>
+                <div class="input-wrapper">
+                    <label>Budget</label>
+                    <select id="budget-filter">
+                        <option value="All">Any Price</option>
+                        <option value="under-5m">Under 5M LKR</option>
+                        <option value="5m-10m">5M - 10M LKR</option>
+                        <option value="10m-plus">10M+ LKR</option>
+                    </select>
+                </div>
+            </div>
+            <button id="search-btn" class="btn btn-primary search-btn">
+                <i class="las la-search" style="font-size: 1.2rem;"></i> Find
+            </button>
         </div>
     </section>
 
-    <!-- Featured Vehicles -->
-    <section id="featured" class="featured-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Featured <span class="text-gradient">Vehicles</span></h2>
-                <p>Hand-picked premium vehicles available in our showroom today.</p>
-            </div>
+    <!-- Featured Vehicles Section -->
+    <section id="featured" class="container">
+        <div class="section-header">
+            <h2>Featured <span class="text-gradient">Showroom</span></h2>
+            <p>Hand-picked premium vehicles available in our showroom today.</p>
+        </div>
 
-            <div class="vehicle-grid" id="vehicle-container">
-                <!-- Data will be loaded here dynamically from Supabase -->
-                <div class="loading-state" style="grid-column: 1/-1; text-align: center; padding: 50px;">
-                    <i class="las la-spinner la-spin" style="font-size: 3rem; color: var(--primary);"></i>
-                    <p style="margin-top: 15px;">Loading vehicles from showroom...</p>
-                </div>
+        <div class="vehicle-grid" id="vehicle-container">
+            <!-- Loading State -->
+            <div style="grid-column: 1/-1; text-align: center; padding: 100px;">
+                <i class="las la-spinner la-spin" style="font-size: 3rem; color: var(--primary);"></i>
+                <p style="margin-top: 1rem; color: var(--text-muted);">Loading our exclusive inventory...</p>
             </div>
-            
-            <div class="text-center mt-5">
-                <a href="#" class="btn-primary btn-large">View Complete Inventory</a>
-            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 5rem; margin-bottom: 8rem;">
+            <a href="#" class="btn btn-secondary btn-large">View Complete Inventory</a>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="services-section">
-        <div class="container">
-            <div class="section-header text-center">
-                <h2>Why Choose <span class="text-gradient">JVS?</span></h2>
-                <p>We provide a complete ecosystem for car buyers, ensuring peace of mind at every step.</p>
+    <section id="services" class="container" style="margin-bottom: 10rem;">
+        <div class="section-header">
+            <h2>Why Choose <span class="text-gradient">JVS</span>?</h2>
+            <p>We provide a complete ecosystem for car buyers, ensuring peace of mind at every step.</p>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon-box">
+                    <i class="las la-certificate"></i>
+                </div>
+                <h3>Quality Assurance</h3>
+                <p>Every vehicle undergoes a rigorous 150-point inspection before hitting our showroom floor.</p>
             </div>
             
-            <div class="services-grid">
-                <div class="service-card glass-panel">
-                    <div class="service-icon"><i class="las la-certificate"></i></div>
-                    <h3>Quality Assurance</h3>
-                    <p>Every vehicle undergoes a rigorous 150-point inspection before hitting our showroom floor.</p>
+            <div class="service-card">
+                <div class="service-icon-box">
+                    <i class="las la-file-invoice-dollar"></i>
                 </div>
-                <div class="service-card glass-panel">
-                    <div class="service-icon"><i class="las la-file-invoice-dollar"></i></div>
-                    <h3>Finance & Leasing</h3>
-                    <p>Easy financing options and fast loan approvals through our trusted banking partners.</p>
+                <h3>Finance & Leasing</h3>
+                <p>Easy financing options and fast loan approvals through our trusted banking partners.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon-box">
+                    <i class="las la-exchange-alt"></i>
                 </div>
-                <div class="service-card glass-panel">
-                    <div class="service-icon"><i class="las la-exchange-alt"></i></div>
-                    <h3>Trade-In Accepted</h3>
-                    <p>Upgrade to your dream vehicle easily. We offer the best market value for your current car.</p>
+                <h3>Trade-In Accepted</h3>
+                <p>Upgrade to your dream vehicle easily. We offer the best market value for your current car.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon-box">
+                    <i class="las la-truck"></i>
                 </div>
-                <div class="service-card glass-panel">
-                    <div class="service-icon"><i class="las la-shipping-fast"></i></div>
-                    <h3>Island-wide Delivery</h3>
-                    <p>We can arrange secure transport of your newly purchased vehicle right to your doorstep.</p>
+                <h3>Island-wide Delivery</h3>
+                <p>We can arrange secure transport of your newly purchased vehicle right to your doorstep.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="container about-section">
+        <div class="about-grid">
+            <div class="about-image-wrapper">
+                <div id="about-slider" class="about-slider">
+                    <img src="about_img_1.jpeg" alt="Our Showroom" class="about-slide active">
+                    <img src="about_img_2.jpeg" alt="Our Showroom" class="about-slide">
+                    <img src="about_img_3.jpeg" alt="Our Showroom" class="about-slide">
+                    <img src="about_img_4.jpeg" alt="Our Showroom" class="about-slide">
+                    <img src="about_img_5.jpeg" alt="Our Showroom" class="about-slide">
+                    <img src="about_img_6.jpeg" alt="Our Showroom" class="about-slide">
+                    <img src="about_img_7.jpeg" alt="Our Showroom" class="about-slide">
+                    <img src="about_img_8.jpeg" alt="Our Showroom" class="about-slide">
+                    <img src="about_img_9.jpeg" alt="Our Showroom" class="about-slide">
+                    <img src="about_img_10.jpeg" alt="Our Showroom" class="about-slide">
+                </div>
+                <div class="about-overlay glass">
+                    <p>Established 2015</p>
+                </div>
+            </div>
+            <div class="about-content">
+                <h2 class="section-title">About <span class="text-gradient">Jaffna Vehicle Spot</span></h2>
+                <div class="about-text">
+                    <p>Welcome to <strong>Jaffna Vehicle Spot</strong> — your trusted destination for luxury, premium, and high-quality vehicles in Jaffna. We bring you an exclusive collection of carefully selected cars, SUVs, vans, and premium vehicles that combine elegance, comfort, performance, and reliability.</p>
+                    <p>Whether you are searching for a stylish daily drive, a family vehicle, or a luxury experience, our showroom offers exceptional choices to match your lifestyle and budget.</p>
+                    <p>At Jaffna Vehicle Spot, we focus on quality, transparency, and customer satisfaction. Every vehicle is inspected to ensure excellent condition, outstanding performance, and maximum value. With a modern buying experience, trusted service, and a passion for automobiles, we are committed to helping you find the perfect vehicle with confidence.</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <strong>500+</strong>
+                        <span>Vehicles Sold</span>
+                    </div>
+                    <div class="stat-item">
+                        <strong>100%</strong>
+                        <span>Customer Satisfaction</span>
+                    </div>
+                    <div class="stat-item br-card glass" style="grid-column: span 2; display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; cursor: pointer; transition: 0.3s;" onclick="window.open('br_certificate.png', '_blank')">
+                        <div style="width: 60px; height: 60px; background: rgba(0,242,255,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.5rem;">
+                            <i class="las la-certificate"></i>
+                        </div>
+                        <div style="text-align: left;">
+                            <strong style="display: block; font-size: 1.1rem; margin-bottom: 2px;">Registered Business</strong>
+                            <span style="font-size: 0.85rem; color: var(--text-muted);">Jaffna Vehicle Spot (Pvt) Ltd - PV 00250669</span>
+                        </div>
+                        <i class="las la-external-link-alt" style="margin-left: auto; color: var(--text-muted);"></i>
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Section -->
+    <section id="leadership" class="container" style="padding: 40px 0;">
+        <div class="section-header">
+            <div class="hero-badge" style="margin: 0 auto 1.5rem; animation: none;">
+                <i class="las la-users"></i> Our Foundation
+            </div>
+            <h2>Meet Our <span class="text-gradient">Founder</span></h2>
+            <p>The visionary mind behind Jaffna's premier automotive destination.</p>
+        </div>
+        
+        <div class="leadership-card glass">
+            <div class="leadership-img-container">
+                <img src="ceo.jpeg" alt="Ponnuchchamy Ratheeswaran" class="ceo-img" onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80'">
+                <div class="leadership-badge">
+                    <i class="las la-crown"></i>
+                </div>
+            </div>
+            <div class="leadership-info">
+                <div class="info-header">
+                    <h3 class="ceo-name">Ponnuchchamy Ratheeswaran</h3>
+                    <span class="ceo-title">Founder & CEO</span>
+                </div>
+                <div class="ceo-divider"></div>
+                <p class="ceo-quote">"Our mission is to redefine the vehicle buying experience in Jaffna by providing unparalleled quality and trust. Every car we sell is a commitment to excellence."</p>
+                <div class="ceo-social">
+                    <a href="#" aria-label="LinkedIn"><i class="lab la-linkedin"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="lab la-facebook"></i></a>
+                    <a href="https://wa.me/94778449700" aria-label="WhatsApp"><i class="lab la-whatsapp"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Call to Action -->
-    <section id="contact" class="cta-section">
-        <div class="container">
-            <div class="cta-box glass-panel">
-                <div class="cta-content">
-                    <h2>Ready to find your match?</h2>
-                    <p>Visit our showroom in Jaffna or contact our sales team to arrange a test drive today.</p>
-                    <div class="cta-buttons">
-                        <a href="tel:+94778449700" class="btn-primary btn-large cta-btn">
-                            <i class="las la-phone"></i> Call 077 844 9700
-                        </a>
-                        <a href="https://wa.me/94778449700" class="btn-whatsapp btn-large cta-btn">
-                            <i class="lab la-whatsapp"></i> Chat on WhatsApp
-                        </a>
-                    </div>
-                </div>
-            </div>
+    <!-- Find Us Section -->
+    <section id="location" class="container" style="padding: 100px 0;">
+        <div class="section-header">
+            <h2>Find <span class="text-gradient">Us</span></h2>
+            <p>Visit our showroom in Jaffna for a personal consultation.</p>
+        </div>
+        <div class="glass map-container" style="padding: 1rem; border-radius: 2rem; overflow: hidden; height: 500px; border: 1px solid var(--glass-border);">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3932.770380378716!2d80.0158538!3d9.7006289!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afe55376668997f%3A0x751cdd20d27db0db!2sVehicle%20spot%20jaffna!5e0!3m2!1sen!2slk!4v1778865535889!5m2!1sen!2slk" width="100%" height="100%" style="border:0; border-radius: 1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container footer-grid">
-            <div class="footer-col">
-                <a href="#" class="logo-brand footer-logo">
-                    <img src="logo.jpg" alt="Jaffna Vehicle Spot" class="brand-icon">
-                    <span class="brand-text">Jaffna Vehicle Spot</span>
-                </a>
-                <p class="footer-desc">Jaffna Vehicle Spot is Northern Province's premier destination for high-quality imported and local vehicles. Providing exceptional service since 2015.</p>
-                <div class="social-links">
-                    <a href="#"><i class="lab la-facebook-f"></i></a>
-                    <a href="#"><i class="lab la-instagram"></i></a>
-                    <a href="#"><i class="lab la-youtube"></i></a>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="brand-text">JVS <span class="text-gradient">Spot</span></span>
+                    <p>The ultimate destination for luxury, premium, and high-quality vehicles in Jaffna. Experience excellence in every drive.</p>
+                    <div class="social-links">
+                        <a href="https://wa.me/94778449700" class="social-btn whatsapp" target="_blank"><i class="lab la-whatsapp"></i></a>
+                        <a href="#" class="social-btn"><i class="lab la-facebook-f"></i></a>
+                        <a href="https://www.tiktok.com/@jaffna.vehicle.sp?_r=1&_t=ZS-96NzfqK2C1t" class="social-btn" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 448 512" fill="currentColor"><path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25V349.38A162.55 162.55 0 1 1 185 188.31V278.2a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.18 121.18 0 0 0 1.86 22.17h.03a122.18 122.18 0 0 0 108.48 104.41v83.33z"/></svg>
+                        </a>
+                        <a href="#" class="social-btn"><i class="lab la-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Explore</h4>
+                    <ul class="footer-links">
+                        <li><a href="#featured">Inventory</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#leadership">Leadership</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="https://maps.app.goo.gl/8CPxceADppYe8mzp9" target="_blank">Location</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><a href="https://maps.app.goo.gl/8CPxceADppYe8mzp9" target="_blank" style="display: flex; gap: 15px; color: inherit;"><i class="las la-map-marker"></i> Jaffna-Kankesanturai Rd, Kokkuvil</a></li>
+                        <li><i class="las la-phone"></i> 077 844 9700</li>
+                        <li><i class="las la-envelope"></i> jaffnavehiclespotpvt@gmail.com</li>
+                    </ul>
                 </div>
             </div>
-            
-            <div class="footer-col">
-                <h3>Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#featured">Featured Vehicles</a></li>
-                    <li><a href="#services">Our Services</a></li>
-                    <li><a href="#about">About Us</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-col">
-                <h3>Vehicle Types</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Sedans & Hatchbacks</a></li>
-                    <li><a href="#">SUVs & Jeeps</a></li>
-                    <li><a href="#">Vans & Commercial</a></li>
-                    <li><a href="#">Motorcycles</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-col">
-                <h3>Contact Info</h3>
-                <ul class="footer-contact">
-                    <li><i class="las la-map-marker"></i> Jaffna-Kankesanturai Rd, Kokkuvil 40000</li>
-                    <li><i class="las la-phone"></i> 077 844 9700</li>
-                    <li><i class="las la-envelope"></i> jaffnavehiclespotpvt@gmail.com</li>
-                    <li><i class="las la-clock"></i> Mon - Sat: 9:00 AM - 6:00 PM</li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="container">
+
+            <div class="footer-bottom">
                 <p>&copy; 2026 Jaffna Vehicle Spot. All rights reserved.</p>
+                <p>Designed for Excellence</p>
             </div>
         </div>
     </footer>
 
-    <!-- Supabase Fetching Logic -->
+    <!-- Scripts -->
     <script>
+        // Supabase Initialization
         const SUPABASE_URL = 'https://uhczvfobofjosodsaicq.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_GlH52YJEuONAGrkxiYWJjQ_mL8SbJET';
         const STORAGE_URL = `${SUPABASE_URL}/storage/v1/object/public/vehicle%20image/`;
-
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // UI Interactions
+        const navbar = document.getElementById('navbar');
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Fetch & Render Vehicles
+        let allVehicles = [];
 
         async function fetchVehicles() {
             const container = document.getElementById('vehicle-container');
-            
             try {
                 const { data, error } = await supabaseClient
                     .from('vehicles')
@@ -268,72 +447,165 @@
                     .order('created_at', { ascending: false });
 
                 if (error) throw error;
-
-                if (!data || data.length === 0) {
-                    container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">No vehicles available at the moment.</div>';
-                    return;
-                }
-
-                container.innerHTML = '';
-                data.forEach(vehicle => {
-                    const card = createVehicleCard(vehicle);
-                    container.appendChild(card);
-                });
-
+                allVehicles = data || [];
+                renderVehicles(allVehicles);
             } catch (err) {
-                console.error('Error fetching vehicles:', err);
-                container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--danger);">Failed to load vehicles. Please try again later.</div>';
+                console.error(err);
+                container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--danger);">Failed to load inventory. Please refresh.</div>';
             }
         }
 
-        function createVehicleCard(vehicle) {
-            const div = document.createElement('article');
-            div.className = 'vehicle-card tilt-effect';
-            
-            // Handle image path logic
-            let imgPath = vehicle.image_url || '';
-            // If the path starts with assets/, it might be a subfolder in the bucket or a local path.
-            // Based on user feedback that images are in storage, we link to storage.
-            const fullImgUrl = imgPath ? (imgPath.startsWith('http') ? imgPath : (STORAGE_URL + imgPath)) : 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=600&q=80';
+        function renderVehicles(vehicles) {
+            const container = document.getElementById('vehicle-container');
+            if (vehicles.length === 0) {
+                container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 50px;">No vehicles match your search. Try different filters!</div>';
+                return;
+            }
 
-            const priceFormatted = vehicle.price ? 
-                `LKR ${new Intl.NumberFormat().format(vehicle.price)}` : 
-                'Contact for Price';
-
-            div.innerHTML = `
-                <div class="card-image-box">
-                    <img src="${fullImgUrl}" alt="${vehicle.name}" onerror="this.src='https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=600&q=80'">
-                    <div class="like-container">
-                        <input type="checkbox" id="like-${vehicle.id}" class="like-input">
-                        <label for="like-${vehicle.id}" class="like-btn">
-                            <i class="las la-heart"></i>
-                        </label>
-                    </div>
-                    ${vehicle.status === 'Available' ? '<span class="condition-badge new">Available</span>' : (vehicle.status ? `<span class="condition-badge used">${vehicle.status}</span>` : '')}
-                </div>
-                <div class="card-content">
-                    <div class="card-topline">
-                        <span class="year">${vehicle.year_of_manufacture || 'N/A'}</span>
-                        <span class="type">${vehicle.category || 'Vehicle'}</span>
-                    </div>
-                    <h3>${vehicle.name} ${vehicle.model || ''}</h3>
-                    <p class="price">${priceFormatted}</p>
-                    
-                    <div class="specs-grid">
-                        <div class="spec-item"><i class="las la-gas-pump"></i> ${vehicle.fuel_type || 'Fuel'}</div>
-                        <div class="spec-item"><i class="las la-cogs"></i> ${vehicle.configurations || 'Auto'}</div>
-                        <div class="spec-item"><i class="las la-map-marker"></i> ${vehicle.branch || 'Jaffna'}</div>
-                        <div class="spec-item"><i class="las la-road"></i> ${vehicle.registration_no || 'Registered'}</div>
-                    </div>
-
-                    <a href="vehicle-details.html?id=${vehicle.id}" class="btn-outline full-width">Enquire Now</a>
-                </div>
-            `;
-            return div;
+            container.innerHTML = '';
+            vehicles.forEach(v => {
+                const img = v.image_url ? (v.image_url.startsWith('http') ? v.image_url : (STORAGE_URL + v.image_url)) : 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=600&q=80';
+                const price = v.price ? `LKR ${(v.price / 1000000).toFixed(1)}M` : 'Ask Price';
+                
+                const card = `
+                    <article class="vehicle-card">
+                        <div class="card-img-wrapper">
+                            <img src="${img}" alt="${v.name}" onerror="this.src='https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=600&q=80'">
+                            <span class="status-badge status-available">${v.status || 'Available'}</span>
+                        </div>
+                        <div class="card-body">
+                            <span class="card-category">${v.category || 'Premium'}</span>
+                            <h3 class="card-title">${v.name} ${v.model || ''}</h3>
+                            <div class="specs-row">
+                                <div class="spec-item"><i class="las la-gas-pump"></i> ${v.fuel_type || 'Petrol'}</div>
+                                <div class="spec-item"><i class="las la-cog"></i> ${v.configurations || 'Auto'}</div>
+                                <div class="spec-item"><i class="las la-calendar"></i> ${v.year_of_manufacture || '2023'}</div>
+                                <div class="spec-item"><i class="las la-map-marker"></i> ${v.branch || 'Jaffna'}</div>
+                            </div>
+                            <div class="card-footer">
+                                <span class="price-tag">${price}</span>
+                                <a href="vehicle-details.html?id=${v.id}" class="btn btn-primary">Details</a>
+                            </div>
+                        </div>
+                    </article>
+                `;
+                container.innerHTML += card;
+            });
         }
 
-        // Initialize fetch on load
-        window.addEventListener('DOMContentLoaded', fetchVehicles);
+        // Search Logic
+        function handleSearch() {
+            const keyword = document.getElementById('search-input').value.toLowerCase();
+            const category = document.getElementById('category-filter').value;
+            const budget = document.getElementById('budget-filter').value;
+
+            const filtered = allVehicles.filter(v => {
+                const matchesKeyword = !keyword || 
+                    v.name.toLowerCase().includes(keyword) || 
+                    (v.model && v.model.toLowerCase().includes(keyword)) ||
+                    (v.year_of_manufacture && v.year_of_manufacture.toString().includes(keyword));
+                
+                const matchesCategory = category === 'All' || v.category === category;
+                
+                let matchesBudget = true;
+                if (budget === 'under-5m') matchesBudget = v.price < 5000000;
+                else if (budget === '5m-10m') matchesBudget = v.price >= 5000000 && v.price <= 10000000;
+                else if (budget === '10m-plus') matchesBudget = v.price > 10000000;
+
+                return matchesKeyword && matchesCategory && matchesBudget;
+            });
+
+            renderVehicles(filtered);
+            
+            // Scroll to results
+            document.getElementById('featured').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        document.getElementById('search-btn').addEventListener('click', handleSearch);
+        document.getElementById('search-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleSearch();
+        });
+
+        // Dynamic Hero Slider
+        async function initHeroSlider() {
+            const slider = document.getElementById('hero-slider');
+            try {
+                const { data, error } = await supabaseClient
+                    .from('vehicles')
+                    .select('image_url')
+                    .neq('status', 'Deleted')
+                    .order('created_at', { ascending: false })
+                    .limit(5);
+
+                if (error) throw error;
+                if (!data || data.length === 0) return;
+
+                const images = data.map(v => v.image_url ? (v.image_url.startsWith('http') ? v.image_url : (STORAGE_URL + v.image_url)) : null).filter(Boolean);
+                if (images.length === 0) return;
+
+                // Clear and inject only if we have new images
+                slider.innerHTML = '';
+                images.forEach((url, i) => {
+                    const img = document.createElement('img');
+                    img.src = url;
+                    img.className = `hero-main-img ${i === 0 ? 'active' : ''}`;
+                    img.alt = "Premium Vehicle";
+                    img.onerror = function() { 
+                        this.remove(); // Remove broken image
+                        if (slider.querySelectorAll('img').length === 0) {
+                            // If all broken, restore fallback
+                            slider.innerHTML = '<img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=1000&q=80" alt="Premium Car" class="hero-main-img active">';
+                        }
+                    };
+                    slider.appendChild(img);
+                });
+
+                // Start animation loop
+                let currentImg = 0;
+                const totalImgs = images.length;
+                
+                if (totalImgs > 1) {
+                    setInterval(() => {
+                        const imgs = slider.querySelectorAll('img');
+                        if (imgs.length <= 1) return;
+                        
+                        imgs[currentImg].classList.remove('active');
+                        currentImg = (currentImg + 1) % imgs.length;
+                        imgs[currentImg].classList.add('active');
+                    }, 6000);
+                }
+
+            } catch (err) {
+                console.error('Hero slider error:', err);
+            }
+        }
+
+        // About Section Slider
+        function initAboutSlider() {
+            const slides = document.querySelectorAll('.about-slide');
+            if (slides.length <= 1) return;
+
+            let currentSlide = 0;
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchVehicles();
+            initHeroSlider();
+            initAboutSlider();
+
+            // Close mobile menu when a link is clicked
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                });
+            });
+        });
     </script>
 </body>
 </html>
