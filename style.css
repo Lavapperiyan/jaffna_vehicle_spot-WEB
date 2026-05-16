@@ -1239,11 +1239,11 @@ ul {
     .leadership-card {
         grid-template-columns: 1fr;
         text-align: center;
-        padding: 3rem 2rem;
-        gap: 2.5rem;
+        padding: 3.5rem 2.5rem;
+        gap: 3rem;
     }
     .leadership-img-container {
-        max-width: 350px;
+        max-width: 380px;
         margin: 0 auto;
     }
     .ceo-divider {
@@ -1259,5 +1259,49 @@ ul {
     }
     .ceo-social {
         justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .leadership-card {
+        padding: 2.5rem 1.5rem;
+        border-radius: 2rem;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    .ceo-name {
+        font-size: 2.2rem;
+    }
+    .ceo-title {
+        font-size: 1rem;
+        letter-spacing: 2px;
+        margin-bottom: 1.5rem;
+    }
+    .ceo-divider {
+        width: 60px;
+        margin-bottom: 1.5rem;
+    }
+    .ceo-quote {
+        font-size: 1.05rem;
+    }
+    .leadership-img-container {
+        max-width: 300px;
+    }
+    .ceo-social a {
+        width: 50px;
+        height: 50px;
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .ceo-name {
+        font-size: 1.8rem;
+    }
+    .leadership-card {
+        padding: 2rem 1rem;
+    }
+    .leadership-img-container {
+        max-width: 250px;
     }
 }
