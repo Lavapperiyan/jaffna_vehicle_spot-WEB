@@ -359,7 +359,8 @@ ul {
     position: relative;
     width: 100%;
     height: 500px;
-    background: #0d1117;
+    background: #1a1f26; /* Fallback background color */
+    z-index: 5;
 }
 
 .about-slide {
@@ -370,14 +371,13 @@ ul {
     height: 100%;
     object-fit: cover;
     opacity: 0;
-    transition: opacity 1.5s ease-in-out, transform 8s linear;
-    transform: scale(1);
+    transition: opacity 1s ease-in-out;
+    z-index: 1;
 }
 
 .about-slide.active {
     opacity: 1;
-    transform: scale(1.1);
-    z-index: 1;
+    z-index: 2;
 }
 
 .about-overlay {
@@ -1285,15 +1285,45 @@ ul {
         flex-direction: column;
         gap: 2rem;
     }
-    
-    .about-slider {
-        height: 350px;
-    }
-    
+
     .about-stats {
         display: grid;
         grid-template-columns: 1fr;
         gap: 1rem;
+    }
+
+    /* About Section Image Gallery Fix (Mobile) */
+    .about-slider {
+        display: flex !important;
+        overflow-x: auto !important;
+        height: 320px !important;
+        gap: 15px !important;
+        padding: 10px !important;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        background: transparent !important;
+    }
+    
+    .about-slide {
+        position: relative !important;
+        opacity: 1 !important;
+        min-width: 85%;
+        height: 100% !important;
+        scroll-snap-align: center;
+        border-radius: 1.5rem !important;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        transform: none !important;
+    }
+    
+    .about-image-wrapper {
+        border-radius: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+    }
+
+    .about-overlay {
+        display: none; /* Remove overlay on mobile gallery for cleaner look */
     }
     
     .stat-item.br-card {
