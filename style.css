@@ -42,8 +42,12 @@
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
+    -webkit-overflow-scrolling: touch;
 }
 
 body {
@@ -51,7 +55,6 @@ body {
     background-color: var(--bg-base);
     color: var(--text-main);
     line-height: 1.6;
-    overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -1325,9 +1328,37 @@ ul {
     }
 }
 
-/* Global Overflow Fix to ensure stability */
-html, body {
-    max-width: 100%;
+html {
+    scroll-behavior: smooth;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    width: 100%;
+    max-width: 100vw;
     overflow-x: hidden;
     position: relative;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Ensure no element can push the width */
+section, .container, .navbar, .footer {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Fix for the business registration card on mobile */
+@media (max-width: 768px) {
+    .stat-item.br-card {
+        grid-column: 1 / -1 !important;
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem 1rem;
+    }
+    
+    .stat-icon-box {
+        margin: 0 auto 1rem;
+    }
 }
