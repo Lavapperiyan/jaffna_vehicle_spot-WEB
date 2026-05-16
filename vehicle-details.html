@@ -18,8 +18,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         .details-container {
-            padding-top: 120px;
-            padding-bottom: 80px;
+            padding-top: 100px;
+            padding-bottom: 60px;
         }
 
         .details-grid {
@@ -255,11 +255,44 @@
         @media (max-width: 992px) {
             .details-grid {
                 grid-template-columns: 1fr;
+                gap: 30px;
             }
 
             .image-gallery {
                 position: relative;
                 top: 0;
+            }
+            
+            .vehicle-info-panel {
+                padding: 20px 15px;
+            }
+            
+            .info-header h1 {
+                font-size: 2rem;
+            }
+            
+            .specs-detailed {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .details-container {
+                padding-top: 80px;
+            }
+            
+            .info-header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .price-tag {
+                font-size: 1.5rem !important;
+            }
+            
+            .detail-value {
+                font-size: 1rem;
+                word-break: break-all;
             }
         }
     </style>

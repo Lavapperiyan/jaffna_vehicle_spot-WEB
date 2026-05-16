@@ -1272,84 +1272,113 @@ ul {
 }
 
 /* =========================================
-   MOBILE UI ENHANCEMENTS (Controlled)
+   COMPREHENSIVE MOBILE OVERHAUL (FIX)
    ========================================= */
 @media (max-width: 992px) {
-    .container { padding: 0 1.5rem; }
-    
+    .container {
+        padding: 0 1.25rem;
+    }
+
+    /* About Section Fixes */
     .about-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
     }
     
     .about-slider {
-        height: 400px;
-        border-radius: 1.5rem;
+        height: 350px;
     }
     
     .about-stats {
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-        margin-top: 30px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .stat-item.br-card {
+        grid-column: span 1 !important;
+        flex-direction: column !important;
+        text-align: center !important;
+        padding: 2rem 1.25rem !important;
+    }
+    
+    .stat-icon-box {
+        margin: 0 auto 1rem !important;
+    }
+
+    /* Leadership Section Fixes */
+    .leadership-card {
+        grid-template-columns: 1fr;
+        padding: 2.5rem 1.25rem;
+        text-align: center;
+        gap: 2rem;
+    }
+    
+    .leadership-img-container {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .ceo-quote {
+        padding-left: 0;
+        border-left: none;
+        border-top: 1px solid var(--primary);
+        padding-top: 2rem;
+    }
+
+    /* Navbar Mobile Fix */
+    .nav-container {
+        justify-content: space-between;
+        padding: 0.75rem 1.25rem;
+    }
+    
+    .brand-text {
+        font-size: 1.1rem; /* Smaller logo text on mobile */
+    }
+    
+    .brand-icon {
+        width: 35px;
+        height: 35px;
     }
 }
 
 @media (max-width: 768px) {
+    /* Details Page Header & Content Fixes */
+    .details-container {
+        padding-top: 100px;
+        padding-bottom: 40px;
+    }
+    
+    .info-header h1 {
+        font-size: 1.8rem !important;
+        margin-top: 10px;
+    }
+    
+    .specs-detailed {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+    
+    .detail-value {
+        font-size: 1rem !important;
+        word-break: break-all;
+    }
+    
+    /* Hero Title Fix */
     .hero-title {
-        font-size: 2.8rem;
-        letter-spacing: -1.5px;
-    }
-    
-    .section-header h2 {
         font-size: 2.2rem;
-    }
-    
-    .about-stats {
-        grid-template-columns: 1fr;
-    }
-    
-    .stat-item {
-        padding: 1.5rem;
-    }
-
-    .leadership-card {
-        padding: 2.5rem 1.25rem;
-        border-radius: 1.5rem;
-        gap: 1.5rem;
-        margin-top: 2rem;
-    }
-    
-    .ceo-name {
-        font-size: 2rem;
-    }
-    
-    .ceo-title {
-        font-size: 0.9rem;
-        letter-spacing: 2px;
-    }
-    
-    .ceo-quote {
-        font-size: 1rem;
-        line-height: 1.6;
-    }
-    
-    .leadership-img-container {
-        max-width: 280px;
+        word-wrap: break-word;
     }
 }
 
 @media (max-width: 480px) {
+    .brand-text {
+        display: none; /* Only show logo icon on very small screens to save space */
+    }
+    
     .hero-title {
-        font-size: 2.2rem;
-    }
-    
-    .hero-actions {
-        flex-direction: column;
-        width: 100%;
-    }
-    
-    .hero-actions .btn {
-        width: 100%;
+        font-size: 1.8rem;
     }
     
     .leadership-card {
@@ -1357,35 +1386,17 @@ ul {
     }
     
     .ceo-name {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
     }
 }
 
-/* Specific Fit Fix for About and Founder Sections */
-@media (max-width: 768px) {
-    #about.container, #leadership.container {
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
-        width: 100% !important;
-        overflow: hidden !important;
-    }
-    
-    .about-grid, .leadership-card {
-        width: 100% !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-    }
-    
-    .about-slider {
-        height: 300px !important; /* Smaller height for small phones */
-    }
-    
-    .leadership-card {
-        padding: 2rem 1.25rem !important;
-        border-radius: 1.5rem !important;
-    }
-    
-    .ceo-name {
-        font-size: 1.8rem !important;
-    }
+/* Global Safety Overlap Prevention */
+* {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow-x: hidden;
+    width: 100%;
 }
